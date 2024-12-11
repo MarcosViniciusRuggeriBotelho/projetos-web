@@ -1,0 +1,221 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100vw;
+    background: linear-gradient(180deg, #000428, #004e92);
+    background-size: cover;
+    color: #fff;
+    user-select: none;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    background: linear-gradient(180deg, #ffffff 0%, #87ceeb 52%, #004e92 100%);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-in-out;
+}
+
+.h2 {
+    font-weight: 700;
+    font-size: 4em;
+    color: #333;
+    letter-spacing: 0.1em;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.reset {
+    padding: 15px 25px;
+    width: auto;
+    color: #fff;
+    background-color: #0078ff;
+    border: none;
+    font-size: 1.2em;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0, 120, 255, 0.5);
+}
+
+.reset:hover {
+    background-color: #005bb5;
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 91, 181, 0.7);
+}
+
+.game {
+    width: 430px;
+    height: 430px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    perspective: 1000px;
+}
+
+.item {
+    position: relative;
+    width: 23%;
+    height: 23%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+    transform: rotateY(180deg);
+    transition: transform 0.6s ease-in-out, box-shadow 0.3s ease-in-out;
+    background: linear-gradient(135deg, #6c6c6c, #3c3c3c);
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.item:hover {
+    transform: scale(1.05) rotateY(0deg);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(145deg, #1a73e8, #1251a4);
+    transform: rotateY(0deg);
+    backface-visibility: hidden;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.emoji-img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.item.boxOpen {
+    transform: rotateY(0deg);
+}
+
+.item.boxOpen::after,
+.item.boxMath::after {
+    transform: rotateY(180deg);
+}
+
+.vitoria {
+    display: none; /* O modal estará oculto por padrão */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow: auto;
+    background: linear-gradient(145deg, #f9d423, #ff4e50);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 999;
+    color: #fff;
+    font-size: 1.5em;
+    animation: popUp 0.5s ease-in-out;
+}
+
+.vitoria.show {
+    display: flex; /* Torna o modal visível */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.vitoria h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+.vitoria button {
+    margin-top: 20px;
+}
+
+
+.botao-retorno img {
+    width: 3.125rem;
+    height: 3.125rem;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5));
+    transition: transform 0.3s ease-in-out;
+}
+
+.botao-retorno {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.botao-retorno:hover img {
+    transform: scale(1.2) rotate(360deg);
+}
+
+/* Media Query para dispositivos menores */
+@media(max-width: 700px) {
+    .game {
+        width: 80vw;
+        height: 80vw;
+        gap: 5px;
+    }
+
+    .item {
+        width: 22%;
+        height: 22%;
+    }
+
+    .reset {
+        font-size: 1em;
+    }
+
+    .h2 {
+        font-size: 2.5em;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes popUp {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
